@@ -26,7 +26,7 @@ fi
 
 # default behaviour is to launch squid
 if [[ -z ${1} ]]; then
-  /usr/lib64/squid/security_file_certgen -c -s /var/lib/ssl_db -M 4MB
+  #/usr/lib64/squid/security_file_certgen -c -s /var/lib/ssl_db -M 4MB
   chown squid:squid -R /var/lib/ssl_db
 
   if [[ ! -d ${SQUID_CACHE_DIR}/00 ]]; then

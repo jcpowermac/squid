@@ -7,8 +7,9 @@ ENV SQUID_CACHE_DIR=/var/spool/squid \
 RUN dnf install squid openssl which -y && \
     dnf clean all
 
+COPY root/ /
+
 COPY entrypoint.sh /
 
-
 ENTRYPOINT ["/entrypoint.sh"]
-EXPOSE 3128 3129
+EXPOSE 3128 3129 3130

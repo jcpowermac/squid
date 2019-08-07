@@ -2,22 +2,26 @@
 
 #FROM: https://jamielinux.com/docs/openssl-certificate-authority/introduction.html
 
-set -x
+set -euxo pipefail
 
-mkdir /root/ca
-cd /root/ca
+ROOTCA=${PWD}/CA
+INTERMEDIATE=${ROOTCA}/INTERMEDIATE
+
+
+mkdir ${ROOTCA}
+cd ${ROOTCA}
 mkdir certs crl newcerts private
 chmod 700 private
 touch index.txt
 echo 1000 > serial
 
-cat > /root/ca/openssl.cnf << EOF
+cat > ${ROOTCA}/openssl.cnf << EOF
 [ ca ]
 default_ca = CA_default
 
 [ CA_default ]
 # Directory and file locations.
-dir               = /root/ca
+dir               = ${ROOTCA}
 certs             = \$dir/certs
 crl_dir           = \$dir/crl
 new_certs_dir     = \$dir/newcerts
@@ -90,6 +94,7 @@ stateOrProvinceName_default     = North Carolina
 localityName_default            = Raleigh
 0.organizationName_default      = OpenShift
 organizationalUnitName_default  = Installer Testing
+commonName_default              = Root CA
 emailAddress_default            =
 
 [ v3_ca ]
@@ -134,7 +139,7 @@ extendedKeyUsage = critical, OCSPSigning
 EOF
 
 # create root key
-cd /root/ca
+cd ${ROOTCA}
 openssl genrsa -aes256 -out private/ca.key.pem 4096
 chmod 400 private/ca.key.pem
 
@@ -149,24 +154,24 @@ chmod 444 certs/ca.cert.pem
 
 openssl x509 -noout -text -in certs/ca.cert.pem
 
-mkdir /root/ca/intermediate
+mkdir ${INTERMEDIATE}
+cd ${INTERMEDIATE}
 
-cd /root/ca/intermediate
 mkdir certs crl csr newcerts private
 chmod 700 private
 touch index.txt
 echo 1000 > serial
 
-echo 1000 > /root/ca/intermediate/crlnumber
+echo 1000 > ${INTERMEDIATE}/crlnumber
 
 
-cat > /root/ca/intermediate/openssl.cnf << EOF
+cat > ${INTERMEDIATE}/openssl.cnf << EOF
 [ ca ]
 default_ca = CA_default
 
 [ CA_default ]
 # Directory and file locations.
-dir               = /root/ca/intermediate
+dir               = ${INTERMEDIATE}
 certs             = \$dir/certs
 crl_dir           = \$dir/crl
 new_certs_dir     = \$dir/newcerts
@@ -239,6 +244,7 @@ stateOrProvinceName_default     = North Carolina
 localityName_default            = Raleigh
 0.organizationName_default      = OpenShift
 organizationalUnitName_default  = Installer Testing
+commonName_default              = Intermediate CA
 emailAddress_default            =
 
 [ v3_ca ]
@@ -282,31 +288,29 @@ keyUsage = critical, digitalSignature
 extendedKeyUsage = critical, OCSPSigning
 EOF
 
-cd /root/ca
+cd ${ROOTCA}
 openssl genrsa -aes256 \
-      -out intermediate/private/intermediate.key.pem 4096
+      -out ${INTERMEDIATE}/private/intermediate.key.pem 4096
 
-chmod 400 intermediate/private/intermediate.key.pem
+chmod 400 ${INTERMEDIATE}/private/intermediate.key.pem
 
-cd /root/ca
-openssl req -config intermediate/openssl.cnf -new -sha256 \
-      -key intermediate/private/intermediate.key.pem \
-      -out intermediate/csr/intermediate.csr.pem
+openssl req -config ${INTERMEDIATE}/openssl.cnf -new -sha256 \
+      -key ${INTERMEDIATE}/private/intermediate.key.pem \
+      -out ${INTERMEDIATE}/csr/intermediate.csr.pem
 
-cd /root/ca
 openssl ca -config openssl.cnf -extensions v3_intermediate_ca \
       -days 3650 -notext -md sha256 \
-      -in intermediate/csr/intermediate.csr.pem \
-      -out intermediate/certs/intermediate.cert.pem
+      -in ${INTERMEDIATE}/csr/intermediate.csr.pem \
+      -out ${INTERMEDIATE}/certs/intermediate.cert.pem
 
 
-chmod 444 intermediate/certs/intermediate.cert.pem
+chmod 444 ${INTERMEDIATE}/certs/intermediate.cert.pem
 
 openssl verify -CAfile certs/ca.cert.pem \
-      intermediate/certs/intermediate.cert.pem
+      ${INTERMEDIATE}/certs/intermediate.cert.pem
 
-cat intermediate/certs/intermediate.cert.pem \
-      certs/ca.cert.pem > intermediate/certs/ca-chain.cert.pem
+cat ${INTERMEDIATE}/certs/intermediate.cert.pem \
+      certs/ca.cert.pem > ${INTERMEDIATE}/certs/ca-chain.cert.pem
 
-chmod 444 intermediate/certs/ca-chain.cert.pem
+chmod 444 ${INTERMEDIATE}/certs/ca-chain.cert.pem
 
