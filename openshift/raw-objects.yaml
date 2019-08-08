@@ -1,0 +1,1110 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      openshift.io/deployment-config.latest-version: "4"
+      openshift.io/deployment-config.name: squid
+      openshift.io/deployment.name: squid-4
+    creationTimestamp: "2019-08-08T00:09:23Z"
+    generateName: squid-4-
+    labels:
+      app: squid
+      deployment: squid-4
+      deploymentconfig: squid
+    name: squid-4-mv92h
+    namespace: default
+    ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicationController
+      name: squid-4
+      uid: c42457d5-b970-11e9-bdda-0abd41bdfd6a
+    resourceVersion: "97296"
+    selfLink: /api/v1/namespaces/default/pods/squid-4-mv92h
+    uid: c6a91f3e-b970-11e9-bdda-0abd41bdfd6a
+  spec:
+    containers:
+    - image: image-registry.openshift-image-registry.svc:5000/default/squid@sha256:8f87bcd4ea8fd37143b75b76140d6b9193fb5ae9381c69895c0cbed6dad81279
+      imagePullPolicy: Always
+      name: squid
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: default-token-glhvg
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: default-dockercfg-74p49
+    nodeName: ip-10-0-129-106.us-east-2.compute.internal
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: default-token-glhvg
+      secret:
+        defaultMode: 420
+        secretName: default-token-glhvg
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2019-08-08T00:09:23Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2019-08-08T00:09:30Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2019-08-08T00:09:30Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2019-08-08T00:09:23Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://cba42137e8973c80d46a2fafcdbf07a52bcc7f1386a02078242c18b6d75f0a25
+      image: image-registry.openshift-image-registry.svc:5000/default/squid@sha256:8f87bcd4ea8fd37143b75b76140d6b9193fb5ae9381c69895c0cbed6dad81279
+      imageID: image-registry.openshift-image-registry.svc:5000/default/squid@sha256:8f87bcd4ea8fd37143b75b76140d6b9193fb5ae9381c69895c0cbed6dad81279
+      lastState: {}
+      name: squid
+      ready: true
+      restartCount: 0
+      state:
+        running:
+          startedAt: "2019-08-08T00:09:30Z"
+    hostIP: 10.0.129.106
+    phase: Running
+    podIP: 10.129.2.12
+    qosClass: BestEffort
+    startTime: "2019-08-08T00:09:23Z"
+- apiVersion: v1
+  kind: ReplicationController
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/desired-replicas: "1"
+      openshift.io/deployer-pod.created-at: 2019-08-07 20:35:37 +0000 UTC
+      openshift.io/deployer-pod.name: squid-1-deploy
+      openshift.io/deployment-config.latest-version: "1"
+      openshift.io/deployment-config.name: squid
+      openshift.io/deployment.cancelled: "true"
+      openshift.io/deployment.phase: Failed
+      openshift.io/deployment.replicas: "0"
+      openshift.io/deployment.status-reason: newer deployment was found running
+      openshift.io/encoded-deployment-config: |
+        {"kind":"DeploymentConfig","apiVersion":"apps.openshift.io/v1","metadata":{"name":"squid","namespace":"default","selfLink":"/apis/apps.openshift.io/v1/namespaces/default/deploymentconfigs/squid","uid":"a9c8dd08-b952-11e9-98f1-0a580a81001e","resourceVersion":"38664","generation":2,"creationTimestamp":"2019-08-07T20:33:49Z","labels":{"app":"squid","app.kubernetes.io/component":"squid","app.kubernetes.io/instance":"squid","app.kubernetes.io/part-of":"squid","app.openshift.io/runtime-version":""},"annotations":{"app.openshift.io/vcs-ref":"master","app.openshift.io/vcs-uri":"https://github.com/jcpowermac/squid"}},"spec":{"strategy":{"type":"Rolling","rollingParams":{"updatePeriodSeconds":1,"intervalSeconds":1,"timeoutSeconds":600,"maxUnavailable":"25%","maxSurge":"25%"},"resources":{},"activeDeadlineSeconds":21600},"triggers":[{"type":"ImageChange","imageChangeParams":{"automatic":true,"containerNames":["squid"],"from":{"kind":"ImageStreamTag","namespace":"default","name":"squid:latest"},"lastTriggeredImage":"image-registry.openshift-image-registry.svc:5000/default/squid@sha256:b4a425fe75f074c762b7a302034a2353d51435db510a7225ee648c45d4abd494"}},{"type":"ConfigChange"}],"replicas":1,"revisionHistoryLimit":10,"test":false,"selector":{"app":"squid","deploymentconfig":"squid"},"template":{"metadata":{"creationTimestamp":null,"labels":{"app":"squid","deploymentconfig":"squid"}},"spec":{"containers":[{"name":"squid","image":"image-registry.openshift-image-registry.svc:5000/default/squid@sha256:b4a425fe75f074c762b7a302034a2353d51435db510a7225ee648c45d4abd494","resources":{},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","imagePullPolicy":"Always"}],"restartPolicy":"Always","terminationGracePeriodSeconds":30,"dnsPolicy":"ClusterFirst","securityContext":{},"schedulerName":"default-scheduler"}}},"status":{"latestVersion":1,"observedGeneration":1,"replicas":0,"updatedReplicas":0,"availableReplicas":0,"unavailableReplicas":0,"details":{"message":"config change","causes":[{"type":"ConfigChange"}]},"conditions":[{"type":"Available","status":"False","lastUpdateTime":"2019-08-07T20:33:50Z","lastTransitionTime":"2019-08-07T20:33:50Z","message":"Deployment config does not have minimum availability."}]}}
+    creationTimestamp: "2019-08-07T20:35:37Z"
+    generation: 3
+    labels:
+      app: squid
+      app.kubernetes.io/component: squid
+      app.kubernetes.io/instance: squid
+      app.kubernetes.io/part-of: squid
+      app.openshift.io/runtime-version: ""
+      openshift.io/deployment-config.name: squid
+    name: squid-1
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DeploymentConfig
+      name: squid
+      uid: a9c8dd08-b952-11e9-98f1-0a580a81001e
+    resourceVersion: "39980"
+    selfLink: /api/v1/namespaces/default/replicationcontrollers/squid-1
+    uid: e9b0c290-b952-11e9-bdda-0abd41bdfd6a
+  spec:
+    replicas: 0
+    selector:
+      app: squid
+      deployment: squid-1
+      deploymentconfig: squid
+    template:
+      metadata:
+        annotations:
+          openshift.io/deployment-config.latest-version: "1"
+          openshift.io/deployment-config.name: squid
+          openshift.io/deployment.name: squid-1
+        creationTimestamp: null
+        labels:
+          app: squid
+          deployment: squid-1
+          deploymentconfig: squid
+      spec:
+        containers:
+        - image: image-registry.openshift-image-registry.svc:5000/default/squid@sha256:b4a425fe75f074c762b7a302034a2353d51435db510a7225ee648c45d4abd494
+          imagePullPolicy: Always
+          name: squid
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    observedGeneration: 3
+    replicas: 0
+- apiVersion: v1
+  kind: ReplicationController
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/original-replicas: "1"
+      openshift.io/deployer-pod.completed-at: 2019-08-07 20:40:16 +0000 UTC
+      openshift.io/deployer-pod.created-at: 2019-08-07 20:39:54 +0000 UTC
+      openshift.io/deployer-pod.name: squid-2-deploy
+      openshift.io/deployment-config.latest-version: "2"
+      openshift.io/deployment-config.name: squid
+      openshift.io/deployment.phase: Complete
+      openshift.io/deployment.replicas: "1"
+      openshift.io/deployment.status-reason: image change
+      openshift.io/encoded-deployment-config: |
+        {"kind":"DeploymentConfig","apiVersion":"apps.openshift.io/v1","metadata":{"name":"squid","namespace":"default","selfLink":"/apis/apps.openshift.io/v1/namespaces/default/deploymentconfigs/squid","uid":"a9c8dd08-b952-11e9-98f1-0a580a81001e","resourceVersion":"39918","generation":3,"creationTimestamp":"2019-08-07T20:33:49Z","labels":{"app":"squid","app.kubernetes.io/component":"squid","app.kubernetes.io/instance":"squid","app.kubernetes.io/part-of":"squid","app.openshift.io/runtime-version":""},"annotations":{"app.openshift.io/vcs-ref":"master","app.openshift.io/vcs-uri":"https://github.com/jcpowermac/squid"}},"spec":{"strategy":{"type":"Rolling","rollingParams":{"updatePeriodSeconds":1,"intervalSeconds":1,"timeoutSeconds":600,"maxUnavailable":"25%","maxSurge":"25%"},"resources":{},"activeDeadlineSeconds":21600},"triggers":[{"type":"ImageChange","imageChangeParams":{"automatic":true,"containerNames":["squid"],"from":{"kind":"ImageStreamTag","namespace":"default","name":"squid:latest"},"lastTriggeredImage":"image-registry.openshift-image-registry.svc:5000/default/squid@sha256:98a66410fd5ead5d03a2d59bbb5ca729a21b4a5e25ada33def00a5059d8d8447"}},{"type":"ConfigChange"}],"replicas":1,"revisionHistoryLimit":10,"test":false,"selector":{"app":"squid","deploymentconfig":"squid"},"template":{"metadata":{"creationTimestamp":null,"labels":{"app":"squid","deploymentconfig":"squid"}},"spec":{"containers":[{"name":"squid","image":"image-registry.openshift-image-registry.svc:5000/default/squid@sha256:98a66410fd5ead5d03a2d59bbb5ca729a21b4a5e25ada33def00a5059d8d8447","resources":{},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","imagePullPolicy":"Always"}],"restartPolicy":"Always","terminationGracePeriodSeconds":30,"dnsPolicy":"ClusterFirst","securityContext":{},"schedulerName":"default-scheduler"}}},"status":{"latestVersion":2,"observedGeneration":2,"replicas":1,"updatedReplicas":1,"availableReplicas":0,"unavailableReplicas":1,"details":{"message":"image change","causes":[{"type":"ImageChange","imageTrigger":{"from":{"kind":"DockerImage","name":"image-registry.openshift-image-registry.svc:5000/default/squid@sha256:98a66410fd5ead5d03a2d59bbb5ca729a21b4a5e25ada33def00a5059d8d8447"}}}]},"conditions":[{"type":"Available","status":"False","lastUpdateTime":"2019-08-07T20:33:50Z","lastTransitionTime":"2019-08-07T20:33:50Z","message":"Deployment config does not have minimum availability."},{"type":"Progressing","status":"True","lastUpdateTime":"2019-08-07T20:35:42Z","lastTransitionTime":"2019-08-07T20:35:42Z","reason":"ReplicationControllerUpdated","message":"replication controller \"squid-1\" is progressing"}]}}
+    creationTimestamp: "2019-08-07T20:39:54Z"
+    generation: 3
+    labels:
+      app: squid
+      app.kubernetes.io/component: squid
+      app.kubernetes.io/instance: squid
+      app.kubernetes.io/part-of: squid
+      app.openshift.io/runtime-version: ""
+      openshift.io/deployment-config.name: squid
+    name: squid-2
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DeploymentConfig
+      name: squid
+      uid: a9c8dd08-b952-11e9-98f1-0a580a81001e
+    resourceVersion: "45155"
+    selfLink: /api/v1/namespaces/default/replicationcontrollers/squid-2
+    uid: 834cb6f4-b953-11e9-bdda-0abd41bdfd6a
+  spec:
+    replicas: 0
+    selector:
+      app: squid
+      deployment: squid-2
+      deploymentconfig: squid
+    template:
+      metadata:
+        annotations:
+          openshift.io/deployment-config.latest-version: "2"
+          openshift.io/deployment-config.name: squid
+          openshift.io/deployment.name: squid-2
+        creationTimestamp: null
+        labels:
+          app: squid
+          deployment: squid-2
+          deploymentconfig: squid
+      spec:
+        containers:
+        - image: image-registry.openshift-image-registry.svc:5000/default/squid@sha256:98a66410fd5ead5d03a2d59bbb5ca729a21b4a5e25ada33def00a5059d8d8447
+          imagePullPolicy: Always
+          name: squid
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    observedGeneration: 3
+    replicas: 0
+- apiVersion: v1
+  kind: ReplicationController
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/original-replicas: "1"
+      openshift.io/deployer-pod.completed-at: 2019-08-07 20:58:41 +0000 UTC
+      openshift.io/deployer-pod.created-at: 2019-08-07 20:58:27 +0000 UTC
+      openshift.io/deployer-pod.name: squid-3-deploy
+      openshift.io/deployment-config.latest-version: "3"
+      openshift.io/deployment-config.name: squid
+      openshift.io/deployment.phase: Complete
+      openshift.io/deployment.replicas: ""
+      openshift.io/deployment.status-reason: image change
+      openshift.io/encoded-deployment-config: |
+        {"kind":"DeploymentConfig","apiVersion":"apps.openshift.io/v1","metadata":{"name":"squid","namespace":"default","selfLink":"/apis/apps.openshift.io/v1/namespaces/default/deploymentconfigs/squid","uid":"a9c8dd08-b952-11e9-98f1-0a580a81001e","resourceVersion":"45065","generation":4,"creationTimestamp":"2019-08-07T20:33:49Z","labels":{"app":"squid","app.kubernetes.io/component":"squid","app.kubernetes.io/instance":"squid","app.kubernetes.io/part-of":"squid","app.openshift.io/runtime-version":""},"annotations":{"app.openshift.io/vcs-ref":"master","app.openshift.io/vcs-uri":"https://github.com/jcpowermac/squid"}},"spec":{"strategy":{"type":"Rolling","rollingParams":{"updatePeriodSeconds":1,"intervalSeconds":1,"timeoutSeconds":600,"maxUnavailable":"25%","maxSurge":"25%"},"resources":{},"activeDeadlineSeconds":21600},"triggers":[{"type":"ImageChange","imageChangeParams":{"automatic":true,"containerNames":["squid"],"from":{"kind":"ImageStreamTag","namespace":"default","name":"squid:latest"},"lastTriggeredImage":"image-registry.openshift-image-registry.svc:5000/default/squid@sha256:c8eecd00cef9fea609138cd99393590487fee46e9cc913d05e6a99c21eb56e50"}},{"type":"ConfigChange"}],"replicas":1,"revisionHistoryLimit":10,"test":false,"selector":{"app":"squid","deploymentconfig":"squid"},"template":{"metadata":{"creationTimestamp":null,"labels":{"app":"squid","deploymentconfig":"squid"}},"spec":{"containers":[{"name":"squid","image":"image-registry.openshift-image-registry.svc:5000/default/squid@sha256:c8eecd00cef9fea609138cd99393590487fee46e9cc913d05e6a99c21eb56e50","resources":{},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","imagePullPolicy":"Always"}],"restartPolicy":"Always","terminationGracePeriodSeconds":30,"dnsPolicy":"ClusterFirst","securityContext":{},"schedulerName":"default-scheduler"}}},"status":{"latestVersion":3,"observedGeneration":3,"replicas":1,"updatedReplicas":1,"availableReplicas":1,"unavailableReplicas":0,"details":{"message":"image change","causes":[{"type":"ImageChange","imageTrigger":{"from":{"kind":"DockerImage","name":"image-registry.openshift-image-registry.svc:5000/default/squid@sha256:c8eecd00cef9fea609138cd99393590487fee46e9cc913d05e6a99c21eb56e50"}}}]},"conditions":[{"type":"Available","status":"True","lastUpdateTime":"2019-08-07T20:40:16Z","lastTransitionTime":"2019-08-07T20:40:16Z","message":"Deployment config has minimum availability."},{"type":"Progressing","status":"True","lastUpdateTime":"2019-08-07T20:40:16Z","lastTransitionTime":"2019-08-07T20:39:58Z","reason":"NewReplicationControllerAvailable","message":"replication controller \"squid-2\" successfully rolled out"}],"readyReplicas":1}}
+    creationTimestamp: "2019-08-07T20:58:27Z"
+    generation: 3
+    labels:
+      app: squid
+      app.kubernetes.io/component: squid
+      app.kubernetes.io/instance: squid
+      app.kubernetes.io/part-of: squid
+      app.openshift.io/runtime-version: ""
+      openshift.io/deployment-config.name: squid
+    name: squid-3
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DeploymentConfig
+      name: squid
+      uid: a9c8dd08-b952-11e9-98f1-0a580a81001e
+    resourceVersion: "97310"
+    selfLink: /api/v1/namespaces/default/replicationcontrollers/squid-3
+    uid: 1aa64f55-b956-11e9-bdda-0abd41bdfd6a
+  spec:
+    replicas: 0
+    selector:
+      app: squid
+      deployment: squid-3
+      deploymentconfig: squid
+    template:
+      metadata:
+        annotations:
+          openshift.io/deployment-config.latest-version: "3"
+          openshift.io/deployment-config.name: squid
+          openshift.io/deployment.name: squid-3
+        creationTimestamp: null
+        labels:
+          app: squid
+          deployment: squid-3
+          deploymentconfig: squid
+      spec:
+        containers:
+        - image: image-registry.openshift-image-registry.svc:5000/default/squid@sha256:c8eecd00cef9fea609138cd99393590487fee46e9cc913d05e6a99c21eb56e50
+          imagePullPolicy: Always
+          name: squid
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    observedGeneration: 3
+    replicas: 0
+- apiVersion: v1
+  kind: ReplicationController
+  metadata:
+    annotations:
+      openshift.io/deployer-pod.completed-at: 2019-08-08 00:09:33 +0000 UTC
+      openshift.io/deployer-pod.created-at: 2019-08-08 00:09:19 +0000 UTC
+      openshift.io/deployer-pod.name: squid-4-deploy
+      openshift.io/deployment-config.latest-version: "4"
+      openshift.io/deployment-config.name: squid
+      openshift.io/deployment.phase: Complete
+      openshift.io/deployment.replicas: ""
+      openshift.io/deployment.status-reason: image change
+      openshift.io/encoded-deployment-config: |
+        {"kind":"DeploymentConfig","apiVersion":"apps.openshift.io/v1","metadata":{"name":"squid","namespace":"default","selfLink":"/apis/apps.openshift.io/v1/namespaces/default/deploymentconfigs/squid","uid":"a9c8dd08-b952-11e9-98f1-0a580a81001e","resourceVersion":"97214","generation":5,"creationTimestamp":"2019-08-07T20:33:49Z","labels":{"app":"squid","app.kubernetes.io/component":"squid","app.kubernetes.io/instance":"squid","app.kubernetes.io/part-of":"squid","app.openshift.io/runtime-version":""},"annotations":{"app.openshift.io/vcs-ref":"master","app.openshift.io/vcs-uri":"https://github.com/jcpowermac/squid"}},"spec":{"strategy":{"type":"Rolling","rollingParams":{"updatePeriodSeconds":1,"intervalSeconds":1,"timeoutSeconds":600,"maxUnavailable":"25%","maxSurge":"25%"},"resources":{},"activeDeadlineSeconds":21600},"triggers":[{"type":"ImageChange","imageChangeParams":{"automatic":true,"containerNames":["squid"],"from":{"kind":"ImageStreamTag","namespace":"default","name":"squid:latest"},"lastTriggeredImage":"image-registry.openshift-image-registry.svc:5000/default/squid@sha256:8f87bcd4ea8fd37143b75b76140d6b9193fb5ae9381c69895c0cbed6dad81279"}},{"type":"ConfigChange"}],"replicas":1,"revisionHistoryLimit":10,"test":false,"selector":{"app":"squid","deploymentconfig":"squid"},"template":{"metadata":{"creationTimestamp":null,"labels":{"app":"squid","deploymentconfig":"squid"}},"spec":{"containers":[{"name":"squid","image":"image-registry.openshift-image-registry.svc:5000/default/squid@sha256:8f87bcd4ea8fd37143b75b76140d6b9193fb5ae9381c69895c0cbed6dad81279","resources":{},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","imagePullPolicy":"Always"}],"restartPolicy":"Always","terminationGracePeriodSeconds":30,"dnsPolicy":"ClusterFirst","securityContext":{},"schedulerName":"default-scheduler"}}},"status":{"latestVersion":4,"observedGeneration":4,"replicas":1,"updatedReplicas":1,"availableReplicas":1,"unavailableReplicas":0,"details":{"message":"image change","causes":[{"type":"ImageChange","imageTrigger":{"from":{"kind":"DockerImage","name":"image-registry.openshift-image-registry.svc:5000/default/squid@sha256:8f87bcd4ea8fd37143b75b76140d6b9193fb5ae9381c69895c0cbed6dad81279"}}}]},"conditions":[{"type":"Available","status":"True","lastUpdateTime":"2019-08-07T20:40:16Z","lastTransitionTime":"2019-08-07T20:40:16Z","message":"Deployment config has minimum availability."},{"type":"Progressing","status":"True","lastUpdateTime":"2019-08-07T20:58:41Z","lastTransitionTime":"2019-08-07T20:58:39Z","reason":"NewReplicationControllerAvailable","message":"replication controller \"squid-3\" successfully rolled out"}],"readyReplicas":1}}
+    creationTimestamp: "2019-08-08T00:09:18Z"
+    generation: 2
+    labels:
+      app: squid
+      app.kubernetes.io/component: squid
+      app.kubernetes.io/instance: squid
+      app.kubernetes.io/part-of: squid
+      app.openshift.io/runtime-version: ""
+      openshift.io/deployment-config.name: squid
+    name: squid-4
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DeploymentConfig
+      name: squid
+      uid: a9c8dd08-b952-11e9-98f1-0a580a81001e
+    resourceVersion: "97325"
+    selfLink: /api/v1/namespaces/default/replicationcontrollers/squid-4
+    uid: c42457d5-b970-11e9-bdda-0abd41bdfd6a
+  spec:
+    replicas: 1
+    selector:
+      app: squid
+      deployment: squid-4
+      deploymentconfig: squid
+    template:
+      metadata:
+        annotations:
+          openshift.io/deployment-config.latest-version: "4"
+          openshift.io/deployment-config.name: squid
+          openshift.io/deployment.name: squid-4
+        creationTimestamp: null
+        labels:
+          app: squid
+          deployment: squid-4
+          deploymentconfig: squid
+      spec:
+        containers:
+        - image: image-registry.openshift-image-registry.svc:5000/default/squid@sha256:8f87bcd4ea8fd37143b75b76140d6b9193fb5ae9381c69895c0cbed6dad81279
+          imagePullPolicy: Always
+          name: squid
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 2
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      app.openshift.io/vcs-ref: master
+      app.openshift.io/vcs-uri: https://github.com/jcpowermac/squid
+    creationTimestamp: "2019-08-07T20:33:49Z"
+    labels:
+      app: squid
+      app.kubernetes.io/component: squid
+      app.kubernetes.io/instance: squid
+      app.kubernetes.io/part-of: squid
+      app.openshift.io/runtime-version: ""
+    name: squid
+    namespace: default
+    resourceVersion: "38157"
+    selfLink: /api/v1/namespaces/default/services/squid
+    uid: a9c3a6cd-b952-11e9-bdda-0abd41bdfd6a
+  spec:
+    clusterIP: 172.30.85.174
+    ports:
+    - name: 3128-tcp
+      port: 3128
+      protocol: TCP
+      targetPort: 3128
+    selector:
+      app: squid
+      deploymentconfig: squid
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      app.openshift.io/vcs-ref: master
+      app.openshift.io/vcs-uri: https://github.com/jcpowermac/squid
+    creationTimestamp: "2019-08-08T00:11:40Z"
+    labels:
+      app: squid
+      app.kubernetes.io/component: squid
+      app.kubernetes.io/instance: squid
+      app.kubernetes.io/part-of: squid
+      app.openshift.io/runtime-version: ""
+    name: squid-https
+    namespace: default
+    resourceVersion: "97852"
+    selfLink: /api/v1/namespaces/default/services/squid-https
+    uid: 183f9953-b971-11e9-bdda-0abd41bdfd6a
+  spec:
+    clusterIP: 172.30.118.7
+    ports:
+    - name: 3129-tcp
+      port: 3129
+      protocol: TCP
+      targetPort: 3129
+    selector:
+      app: squid
+      deploymentconfig: squid
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      app.openshift.io/vcs-ref: master
+      app.openshift.io/vcs-uri: https://github.com/jcpowermac/squid
+    creationTimestamp: "2019-08-07T21:28:49Z"
+    labels:
+      app: squid
+      app.kubernetes.io/component: squid
+      app.kubernetes.io/instance: squid
+      app.kubernetes.io/part-of: squid
+      app.openshift.io/runtime-version: ""
+    name: squid-nodeport
+    namespace: default
+    resourceVersion: "53424"
+    selfLink: /api/v1/namespaces/default/services/squid-nodeport
+    uid: 589c5e0c-b95a-11e9-b237-068b14d006e2
+  spec:
+    clusterIP: 172.30.118.62
+    externalTrafficPolicy: Cluster
+    ports:
+    - name: 3128-tcp
+      nodePort: 32128
+      port: 3128
+      protocol: TCP
+      targetPort: 3128
+    selector:
+      app: squid
+      deploymentconfig: squid
+    sessionAffinity: None
+    type: NodePort
+  status:
+    loadBalancer: {}
+- apiVersion: apps.openshift.io/v1
+  kind: DeploymentConfig
+  metadata:
+    annotations:
+      app.openshift.io/vcs-ref: master
+      app.openshift.io/vcs-uri: https://github.com/jcpowermac/squid
+    creationTimestamp: "2019-08-07T20:33:49Z"
+    generation: 5
+    labels:
+      app: squid
+      app.kubernetes.io/component: squid
+      app.kubernetes.io/instance: squid
+      app.kubernetes.io/part-of: squid
+      app.openshift.io/runtime-version: ""
+    name: squid
+    namespace: default
+    resourceVersion: "97326"
+    selfLink: /apis/apps.openshift.io/v1/namespaces/default/deploymentconfigs/squid
+    uid: a9c8dd08-b952-11e9-98f1-0a580a81001e
+  spec:
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      app: squid
+      deploymentconfig: squid
+    strategy:
+      activeDeadlineSeconds: 21600
+      resources: {}
+      rollingParams:
+        intervalSeconds: 1
+        maxSurge: 25%
+        maxUnavailable: 25%
+        timeoutSeconds: 600
+        updatePeriodSeconds: 1
+      type: Rolling
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: squid
+          deploymentconfig: squid
+      spec:
+        containers:
+        - image: image-registry.openshift-image-registry.svc:5000/default/squid@sha256:8f87bcd4ea8fd37143b75b76140d6b9193fb5ae9381c69895c0cbed6dad81279
+          imagePullPolicy: Always
+          name: squid
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+    test: false
+    triggers:
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+        - squid
+        from:
+          kind: ImageStreamTag
+          name: squid:latest
+          namespace: default
+        lastTriggeredImage: image-registry.openshift-image-registry.svc:5000/default/squid@sha256:8f87bcd4ea8fd37143b75b76140d6b9193fb5ae9381c69895c0cbed6dad81279
+      type: ImageChange
+    - type: ConfigChange
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2019-08-07T20:40:16Z"
+      lastUpdateTime: "2019-08-07T20:40:16Z"
+      message: Deployment config has minimum availability.
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2019-08-08T00:09:31Z"
+      lastUpdateTime: "2019-08-08T00:09:33Z"
+      message: replication controller "squid-4" successfully rolled out
+      reason: NewReplicationControllerAvailable
+      status: "True"
+      type: Progressing
+    details:
+      causes:
+      - imageTrigger:
+          from:
+            kind: DockerImage
+            name: image-registry.openshift-image-registry.svc:5000/default/squid@sha256:8f87bcd4ea8fd37143b75b76140d6b9193fb5ae9381c69895c0cbed6dad81279
+        type: ImageChange
+      message: image change
+    latestVersion: 4
+    observedGeneration: 5
+    readyReplicas: 1
+    replicas: 1
+    unavailableReplicas: 0
+    updatedReplicas: 1
+- apiVersion: build.openshift.io/v1
+  kind: BuildConfig
+  metadata:
+    annotations:
+      app.openshift.io/vcs-ref: master
+      app.openshift.io/vcs-uri: https://github.com/jcpowermac/squid
+    creationTimestamp: "2019-08-07T20:33:49Z"
+    labels:
+      app: squid
+      app.kubernetes.io/component: squid
+      app.kubernetes.io/instance: squid
+      app.kubernetes.io/part-of: squid
+      app.openshift.io/runtime-version: ""
+    name: squid
+    namespace: default
+    resourceVersion: "96736"
+    selfLink: /apis/build.openshift.io/v1/namespaces/default/buildconfigs/squid
+    uid: a9c341f7-b952-11e9-90a8-0a580a820026
+  spec:
+    failedBuildsHistoryLimit: 5
+    nodeSelector: null
+    output:
+      to:
+        kind: ImageStreamTag
+        name: squid:latest
+    postCommit: {}
+    resources: {}
+    runPolicy: Serial
+    source:
+      contextDir: /
+      git:
+        uri: https://github.com/jcpowermac/squid
+      type: Git
+    strategy:
+      dockerStrategy:
+        dockerfilePath: Dockerfile
+      type: Docker
+    successfulBuildsHistoryLimit: 5
+    triggers:
+    - type: ConfigChange
+  status:
+    lastVersion: 4
+- apiVersion: build.openshift.io/v1
+  kind: Build
+  metadata:
+    annotations:
+      openshift.io/build-config.name: squid
+      openshift.io/build.number: "1"
+      openshift.io/build.pod-name: squid-1-build
+    creationTimestamp: "2019-08-07T20:33:50Z"
+    labels:
+      app: squid
+      app.kubernetes.io/component: squid
+      app.kubernetes.io/instance: squid
+      app.kubernetes.io/part-of: squid
+      app.openshift.io/runtime-version: ""
+      buildconfig: squid
+      openshift.io/build-config.name: squid
+      openshift.io/build.start-policy: Serial
+    name: squid-1
+    namespace: default
+    ownerReferences:
+    - apiVersion: build.openshift.io/v1
+      controller: true
+      kind: BuildConfig
+      name: squid
+      uid: a9c341f7-b952-11e9-90a8-0a580a820026
+    resourceVersion: "38667"
+    selfLink: /apis/build.openshift.io/v1/namespaces/default/builds/squid-1
+    uid: a9ee46c3-b952-11e9-98f1-0a580a81001e
+  spec:
+    nodeSelector: null
+    output:
+      pushSecret:
+        name: builder-dockercfg-hnzmf
+      to:
+        kind: ImageStreamTag
+        name: squid:latest
+    postCommit: {}
+    resources: {}
+    revision:
+      git:
+        author:
+          email: jcallen@redhat.com
+          name: Joseph Callen
+        commit: 725ade936016ea7341ac4ac8b923bd3457cda4a9
+        committer:
+          email: jcallen@redhat.com
+          name: Joseph Callen
+        message: testing updates
+      type: Git
+    serviceAccount: builder
+    source:
+      contextDir: /
+      git:
+        uri: https://github.com/jcpowermac/squid
+      type: Git
+    strategy:
+      dockerStrategy:
+        dockerfilePath: Dockerfile
+      type: Docker
+    triggeredBy:
+    - message: Build configuration change
+  status:
+    completionTimestamp: "2019-08-07T20:35:36Z"
+    config:
+      kind: BuildConfig
+      name: squid
+      namespace: default
+    duration: 106000000000
+    output:
+      to:
+        imageDigest: sha256:b4a425fe75f074c762b7a302034a2353d51435db510a7225ee648c45d4abd494
+    outputDockerImageReference: image-registry.openshift-image-registry.svc:5000/default/squid:latest
+    phase: Complete
+    stages:
+    - durationMilliseconds: 1485
+      name: FetchInputs
+      startTime: "2019-08-07T20:34:00Z"
+      steps:
+      - durationMilliseconds: 1485
+        name: FetchGitSource
+        startTime: "2019-08-07T20:34:00Z"
+    - durationMilliseconds: 15566
+      name: PullImages
+      startTime: "2019-08-07T20:34:05Z"
+      steps:
+      - durationMilliseconds: 15566
+        name: PullBaseImage
+        startTime: "2019-08-07T20:34:05Z"
+    - durationMilliseconds: 68122
+      name: Build
+      startTime: "2019-08-07T20:34:21Z"
+      steps:
+      - durationMilliseconds: 68122
+        name: DockerBuild
+        startTime: "2019-08-07T20:34:21Z"
+    - durationMilliseconds: 7063
+      name: PushImage
+      startTime: "2019-08-07T20:35:29Z"
+      steps:
+      - durationMilliseconds: 7063
+        name: PushDockerImage
+        startTime: "2019-08-07T20:35:29Z"
+    startTimestamp: "2019-08-07T20:33:50Z"
+- apiVersion: build.openshift.io/v1
+  kind: Build
+  metadata:
+    annotations:
+      openshift.io/build-config.name: squid
+      openshift.io/build.number: "2"
+      openshift.io/build.pod-name: squid-2-build
+    creationTimestamp: "2019-08-07T20:37:54Z"
+    labels:
+      app: squid
+      app.kubernetes.io/component: squid
+      app.kubernetes.io/instance: squid
+      app.kubernetes.io/part-of: squid
+      app.openshift.io/runtime-version: ""
+      buildconfig: squid
+      openshift.io/build-config.name: squid
+      openshift.io/build.start-policy: Serial
+    name: squid-2
+    namespace: default
+    ownerReferences:
+    - apiVersion: build.openshift.io/v1
+      controller: true
+      kind: BuildConfig
+      name: squid
+      uid: a9c341f7-b952-11e9-90a8-0a580a820026
+    resourceVersion: "39928"
+    selfLink: /apis/build.openshift.io/v1/namespaces/default/builds/squid-2
+    uid: 3bb7987a-b953-11e9-90a8-0a580a820026
+  spec:
+    nodeSelector: null
+    output:
+      pushSecret:
+        name: builder-dockercfg-hnzmf
+      to:
+        kind: ImageStreamTag
+        name: squid:latest
+    postCommit: {}
+    resources: {}
+    revision:
+      git:
+        author:
+          email: jcallen@redhat.com
+          name: Joseph Callen
+        commit: b30c55876cdccd436acf77406fa3c564dc0407de
+        committer:
+          email: jcallen@redhat.com
+          name: Joseph Callen
+        message: no_ssl
+      type: Git
+    serviceAccount: builder
+    source:
+      contextDir: /
+      git:
+        uri: https://github.com/jcpowermac/squid
+      type: Git
+    strategy:
+      dockerStrategy:
+        dockerfilePath: Dockerfile
+      type: Docker
+    triggeredBy:
+    - message: Manually triggered
+  status:
+    completionTimestamp: "2019-08-07T20:39:52Z"
+    config:
+      kind: BuildConfig
+      name: squid
+      namespace: default
+    duration: 118000000000
+    output:
+      to:
+        imageDigest: sha256:98a66410fd5ead5d03a2d59bbb5ca729a21b4a5e25ada33def00a5059d8d8447
+    outputDockerImageReference: image-registry.openshift-image-registry.svc:5000/default/squid:latest
+    phase: Complete
+    stages:
+    - durationMilliseconds: 1263
+      name: FetchInputs
+      startTime: "2019-08-07T20:38:05Z"
+      steps:
+      - durationMilliseconds: 1263
+        name: FetchGitSource
+        startTime: "2019-08-07T20:38:05Z"
+    - durationMilliseconds: 17897
+      name: PullImages
+      startTime: "2019-08-07T20:38:11Z"
+      steps:
+      - durationMilliseconds: 17897
+        name: PullBaseImage
+        startTime: "2019-08-07T20:38:11Z"
+    - durationMilliseconds: 78413
+      name: Build
+      startTime: "2019-08-07T20:38:29Z"
+      steps:
+      - durationMilliseconds: 78413
+        name: DockerBuild
+        startTime: "2019-08-07T20:38:29Z"
+    - durationMilliseconds: 4289
+      name: PushImage
+      startTime: "2019-08-07T20:39:47Z"
+      steps:
+      - durationMilliseconds: 4289
+        name: PushDockerImage
+        startTime: "2019-08-07T20:39:47Z"
+    startTimestamp: "2019-08-07T20:37:54Z"
+- apiVersion: build.openshift.io/v1
+  kind: Build
+  metadata:
+    annotations:
+      openshift.io/build-config.name: squid
+      openshift.io/build.number: "3"
+      openshift.io/build.pod-name: squid-3-build
+    creationTimestamp: "2019-08-07T20:56:54Z"
+    labels:
+      app: squid
+      app.kubernetes.io/component: squid
+      app.kubernetes.io/instance: squid
+      app.kubernetes.io/part-of: squid
+      app.openshift.io/runtime-version: ""
+      buildconfig: squid
+      openshift.io/build-config.name: squid
+      openshift.io/build.start-policy: Serial
+    name: squid-3
+    namespace: default
+    ownerReferences:
+    - apiVersion: build.openshift.io/v1
+      controller: true
+      kind: BuildConfig
+      name: squid
+      uid: a9c341f7-b952-11e9-90a8-0a580a820026
+    resourceVersion: "45077"
+    selfLink: /apis/build.openshift.io/v1/namespaces/default/builds/squid-3
+    uid: e2e8ebfb-b955-11e9-9833-0a580a80001e
+  spec:
+    nodeSelector: null
+    output:
+      pushSecret:
+        name: builder-dockercfg-hnzmf
+      to:
+        kind: ImageStreamTag
+        name: squid:latest
+    postCommit: {}
+    resources: {}
+    revision:
+      git:
+        author:
+          email: jcallen@redhat.com
+          name: Joseph Callen
+        commit: 3ff87b8691c90f2988bdcedb3854349007276341
+        committer:
+          email: jcallen@redhat.com
+          name: Joseph Callen
+        message: add_pass
+      type: Git
+    serviceAccount: builder
+    source:
+      contextDir: /
+      git:
+        uri: https://github.com/jcpowermac/squid
+      type: Git
+    strategy:
+      dockerStrategy:
+        dockerfilePath: Dockerfile
+      type: Docker
+    triggeredBy:
+    - message: Manually triggered
+  status:
+    completionTimestamp: "2019-08-07T20:58:27Z"
+    config:
+      kind: BuildConfig
+      name: squid
+      namespace: default
+    duration: 93000000000
+    output:
+      to:
+        imageDigest: sha256:c8eecd00cef9fea609138cd99393590487fee46e9cc913d05e6a99c21eb56e50
+    outputDockerImageReference: image-registry.openshift-image-registry.svc:5000/default/squid:latest
+    phase: Complete
+    stages:
+    - durationMilliseconds: 496
+      name: FetchInputs
+      startTime: "2019-08-07T20:56:56Z"
+      steps:
+      - durationMilliseconds: 496
+        name: FetchGitSource
+        startTime: "2019-08-07T20:56:56Z"
+    - durationMilliseconds: 16497
+      name: PullImages
+      startTime: "2019-08-07T20:56:59Z"
+      steps:
+      - durationMilliseconds: 16497
+        name: PullBaseImage
+        startTime: "2019-08-07T20:56:59Z"
+    - durationMilliseconds: 65847
+      name: Build
+      startTime: "2019-08-07T20:57:16Z"
+      steps:
+      - durationMilliseconds: 65847
+        name: DockerBuild
+        startTime: "2019-08-07T20:57:16Z"
+    - durationMilliseconds: 4790
+      name: PushImage
+      startTime: "2019-08-07T20:58:22Z"
+      steps:
+      - durationMilliseconds: 4790
+        name: PushDockerImage
+        startTime: "2019-08-07T20:58:22Z"
+    startTimestamp: "2019-08-07T20:56:54Z"
+- apiVersion: build.openshift.io/v1
+  kind: Build
+  metadata:
+    annotations:
+      openshift.io/build-config.name: squid
+      openshift.io/build.number: "4"
+      openshift.io/build.pod-name: squid-4-build
+    creationTimestamp: "2019-08-08T00:07:47Z"
+    labels:
+      app: squid
+      app.kubernetes.io/component: squid
+      app.kubernetes.io/instance: squid
+      app.kubernetes.io/part-of: squid
+      app.openshift.io/runtime-version: ""
+      buildconfig: squid
+      openshift.io/build-config.name: squid
+      openshift.io/build.start-policy: Serial
+    name: squid-4
+    namespace: default
+    ownerReferences:
+    - apiVersion: build.openshift.io/v1
+      controller: true
+      kind: BuildConfig
+      name: squid
+      uid: a9c341f7-b952-11e9-90a8-0a580a820026
+    resourceVersion: "97216"
+    selfLink: /apis/build.openshift.io/v1/namespaces/default/builds/squid-4
+    uid: 8d8aa8dc-b970-11e9-9833-0a580a80001e
+  spec:
+    nodeSelector: null
+    output:
+      pushSecret:
+        name: builder-dockercfg-hnzmf
+      to:
+        kind: ImageStreamTag
+        name: squid:latest
+    postCommit: {}
+    resources: {}
+    revision:
+      git:
+        author:
+          email: jcallen@redhat.com
+          name: Joseph Callen
+        commit: b0e36cef36440223d17b48da147d2debce8d4b62
+        committer:
+          email: jcallen@redhat.com
+          name: Joseph Callen
+        message: https_port
+      type: Git
+    serviceAccount: builder
+    source:
+      contextDir: /
+      git:
+        uri: https://github.com/jcpowermac/squid
+      type: Git
+    strategy:
+      dockerStrategy:
+        dockerfilePath: Dockerfile
+      type: Docker
+    triggeredBy:
+    - message: Manually triggered
+  status:
+    completionTimestamp: "2019-08-08T00:09:18Z"
+    config:
+      kind: BuildConfig
+      name: squid
+      namespace: default
+    duration: 91000000000
+    output:
+      to:
+        imageDigest: sha256:8f87bcd4ea8fd37143b75b76140d6b9193fb5ae9381c69895c0cbed6dad81279
+    outputDockerImageReference: image-registry.openshift-image-registry.svc:5000/default/squid:latest
+    phase: Complete
+    stages:
+    - durationMilliseconds: 735
+      name: FetchInputs
+      startTime: "2019-08-08T00:07:50Z"
+      steps:
+      - durationMilliseconds: 735
+        name: FetchGitSource
+        startTime: "2019-08-08T00:07:50Z"
+    - durationMilliseconds: 14528
+      name: PullImages
+      startTime: "2019-08-08T00:07:53Z"
+      steps:
+      - durationMilliseconds: 14528
+        name: PullBaseImage
+        startTime: "2019-08-08T00:07:53Z"
+    - durationMilliseconds: 66360
+      name: Build
+      startTime: "2019-08-08T00:08:07Z"
+      steps:
+      - durationMilliseconds: 66360
+        name: DockerBuild
+        startTime: "2019-08-08T00:08:07Z"
+    - durationMilliseconds: 4433
+      name: PushImage
+      startTime: "2019-08-08T00:09:13Z"
+      steps:
+      - durationMilliseconds: 4433
+        name: PushDockerImage
+        startTime: "2019-08-08T00:09:13Z"
+    startTimestamp: "2019-08-08T00:07:47Z"
+- apiVersion: image.openshift.io/v1
+  kind: ImageStream
+  metadata:
+    annotations:
+      app.openshift.io/vcs-ref: master
+      app.openshift.io/vcs-uri: https://github.com/jcpowermac/squid
+    creationTimestamp: "2019-08-07T20:33:49Z"
+    generation: 1
+    labels:
+      app: squid
+      app.kubernetes.io/component: squid
+      app.kubernetes.io/instance: squid
+      app.kubernetes.io/part-of: squid
+      app.openshift.io/runtime-version: ""
+    name: squid
+    namespace: default
+    resourceVersion: "97209"
+    selfLink: /apis/image.openshift.io/v1/namespaces/default/imagestreams/squid
+    uid: a9c0be4c-b952-11e9-90a8-0a580a820026
+  spec:
+    lookupPolicy:
+      local: false
+  status:
+    dockerImageRepository: image-registry.openshift-image-registry.svc:5000/default/squid
+    tags:
+    - items:
+      - created: "2019-08-08T00:09:18Z"
+        dockerImageReference: image-registry.openshift-image-registry.svc:5000/default/squid@sha256:8f87bcd4ea8fd37143b75b76140d6b9193fb5ae9381c69895c0cbed6dad81279
+        generation: 1
+        image: sha256:8f87bcd4ea8fd37143b75b76140d6b9193fb5ae9381c69895c0cbed6dad81279
+      - created: "2019-08-07T20:58:27Z"
+        dockerImageReference: image-registry.openshift-image-registry.svc:5000/default/squid@sha256:c8eecd00cef9fea609138cd99393590487fee46e9cc913d05e6a99c21eb56e50
+        generation: 1
+        image: sha256:c8eecd00cef9fea609138cd99393590487fee46e9cc913d05e6a99c21eb56e50
+      - created: "2019-08-07T20:39:51Z"
+        dockerImageReference: image-registry.openshift-image-registry.svc:5000/default/squid@sha256:98a66410fd5ead5d03a2d59bbb5ca729a21b4a5e25ada33def00a5059d8d8447
+        generation: 1
+        image: sha256:98a66410fd5ead5d03a2d59bbb5ca729a21b4a5e25ada33def00a5059d8d8447
+      - created: "2019-08-07T20:35:36Z"
+        dockerImageReference: image-registry.openshift-image-registry.svc:5000/default/squid@sha256:b4a425fe75f074c762b7a302034a2353d51435db510a7225ee648c45d4abd494
+        generation: 1
+        image: sha256:b4a425fe75f074c762b7a302034a2353d51435db510a7225ee648c45d4abd494
+      tag: latest
+- apiVersion: route.openshift.io/v1
+  kind: Route
+  metadata:
+    annotations:
+      openshift.io/host.generated: "true"
+    creationTimestamp: "2019-08-08T00:12:43Z"
+    labels:
+      app: squid
+      app.kubernetes.io/component: squid
+      app.kubernetes.io/instance: squid
+      app.kubernetes.io/part-of: squid
+      app.openshift.io/runtime-version: ""
+    name: squid
+    namespace: default
+    resourceVersion: "98192"
+    selfLink: /apis/route.openshift.io/v1/namespaces/default/routes/squid
+    uid: 3df85cb2-b971-11e9-98f1-0a580a81001e
+  spec:
+    host: squid-default.apps.jcallen-pxydev-1.devcluster.openshift.com
+    port:
+      targetPort: 3129-tcp
+    subdomain: ""
+    tls:
+      termination: passthrough
+    to:
+      kind: Service
+      name: squid-https
+      weight: 100
+    wildcardPolicy: None
+  status:
+    ingress:
+    - conditions:
+      - lastTransitionTime: "2019-08-08T00:12:43Z"
+        status: "True"
+        type: Admitted
+      host: squid-default.apps.jcallen-pxydev-1.devcluster.openshift.com
+      routerCanonicalHostname: apps.jcallen-pxydev-1.devcluster.openshift.com
+      routerName: default
+      wildcardPolicy: None
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""
